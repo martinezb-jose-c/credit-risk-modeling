@@ -30,9 +30,9 @@ This project requires the following dataset from **Lending Club**:
 credit-risk-modeling/
 ├── data/
 │   ├── accepted_2007_to_2018Q4.csv
-├── notebooks/
-│   └── 01_eda.ipynb
+├── 01_eda.ipynb
 ├── src/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+
