@@ -192,3 +192,63 @@ def create_dti_adjusted(df: pd.DataFrame,
 
     return (new_debt / monthly_income) * 100
 
+
+
+def calculate_iv(df, feature, target):
+    """
+    Information Value for feature selection in credit risk modeling
+
+    IV < 0.02: Not predictive
+    IV 0.02-0.1: Weak predictor
+    IV 0.1-0.3: Medium predictor
+    IV 0.3-0.5: Strong predictor
+    IV > 0.5: Suspicious (possible data leakage)
+
+    Parameters:
+    -----------
+    df : DataFrame
+        Input dataframe
+    feature : str
+        Feature name to calculate IV
+    target : str
+        Target variable name (binary: 0/1)
+
+    Returns:
+    --------
+    float : Information Value
+    """
+    # Create a copy to avoid modifying original data
+    df_iv = df[[feature, target]].copy()
+
+    # Handle numeric features: bin them into groups
+    if df_iv[feature].dtype in ['float64', 'int64']:
+        # Create bins for continuous variables
+        df_iv[feature] = pd.qcut(df_iv[feature], q=10, duplicates='drop')
+
+    # Group by feature values
+    grouped = df_iv.groupby(feature)[target].agg(['count', 'sum'])
+    grouped.columns = ['Total', 'Bad']
+    grouped['Good'] = grouped['Total'] - grouped['Bad']
+
+    # Calculate totals
+    total_good = grouped['Good'].sum()
+    total_bad = grouped['Bad'].sum()
+
+    # Calculate distribution percentages
+    grouped['Dist_Good'] = grouped['Good'] / total_good
+    grouped['Dist_Bad'] = grouped['Bad'] / total_bad
+
+    # Avoid division by zero
+    grouped['Dist_Good'] = grouped['Dist_Good'].replace(0, 0.0001)
+    grouped['Dist_Bad'] = grouped['Dist_Bad'].replace(0, 0.0001)
+
+    # Calculate WoE (Weight of Evidence)
+    grouped['WoE'] = np.log(grouped['Dist_Good'] / grouped['Dist_Bad'])
+
+    # Calculate IV for each bin
+    grouped['IV'] = (grouped['Dist_Good'] - grouped['Dist_Bad']) * grouped['WoE']
+
+    # Sum IV across all bins
+    iv = grouped['IV'].sum()
+
+    return iv

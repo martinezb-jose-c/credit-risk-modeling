@@ -5,3 +5,4 @@ matplotlib
 seaborn
 category_encoders
 pathlib
+imblearn
