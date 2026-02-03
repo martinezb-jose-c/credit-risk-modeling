@@ -14,24 +14,21 @@ This project develops a Probability of Default (PD) model for retail loans using
 ## Data Requirements
 
 This project requires the following dataset from **Lending Club**:
-
-### Download Instructions
 - **Source**: [Lending Club Dataset on Kaggle](https://www.kaggle.com/datasets/wordsforthewise/lending-club)
 - **Required files**:
   - `accepted_2007_to_2018Q4.csv` (~1.6 GB)
 
-### Data Setup
-1. Download the files from Kaggle
-2. Create a `data/` folder in the project root if it doesn't exist
-3. Place both CSV files inside `data/`
+### Data storage
+- Data is stored in [Dropbox](https://www.dropbox.com/scl/fi/gxskg98izg6fmulp22n3r/accepted_2007_to_2018Q4.csv?rlkey=1jl9t026rlg5o009wbf9rbog0&st=eas942l3&dl=1)
 
 ```bash
 # Expected structure:
 credit-risk-modeling/
-├── data/
-│   ├── accepted_2007_to_2018Q4.csv
 ├── 01_eda.ipynb
+├── 02_feature_engineering.ipynb
+├── 03_modeling.ipynb
 ├── src/
+    ├──feature_engineering.py
 ├── .gitignore
 ├── README.md
 └── requirements.txt
