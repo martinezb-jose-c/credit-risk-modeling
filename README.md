@@ -27,6 +27,14 @@ credit-risk-modeling/
 ├── 01_eda.ipynb
 ├── 02_feature_engineering.ipynb
 ├── 03_modeling.ipynb
+├── models/
+    ├──ohe_encoder.pkl
+    ├──scaler.pkl
+    ├──features.pkl
+    ├──woe_encoder.pkl
+├── data/
+    ├──preprocessed/
+        ├──modeling_data.joblib
 ├── src/
     ├──feature_engineering.py
 ├── .gitignore
