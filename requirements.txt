@@ -6,3 +6,5 @@ seaborn
 category_encoders
 pathlib
 imblearn
+joblib
+xgboost
