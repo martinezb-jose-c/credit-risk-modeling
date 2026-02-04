@@ -20,6 +20,7 @@ This project requires the following dataset from **Lending Club**:
 
 ### Data storage
 - Data is stored in [Dropbox](https://www.dropbox.com/scl/fi/gxskg98izg6fmulp22n3r/accepted_2007_to_2018Q4.csv?rlkey=1jl9t026rlg5o009wbf9rbog0&st=eas942l3&dl=1)
+- Preprocessed data is stored in [GitHub] (https://github.com/martinezb-jose-c/credit-risk-modeling/releases/tag/v0.2-alpha)
 
 ```bash
 # Expected structure:
@@ -32,9 +33,6 @@ credit-risk-modeling/
     ├──scaler.pkl
     ├──features.pkl
     ├──woe_encoder.pkl
-├── data/
-    ├──preprocessed/
-        ├──modeling_data.joblib
 ├── src/
     ├──feature_engineering.py
 ├── .gitignore
